@@ -3,18 +3,18 @@ require "minitest/autorun"
 require "minitest/spec"
 
 class KataSpec < Minitest::Spec
-  let(:result) { Kata.new(input).run }
+  let(:result) { Kata::Diamond.new(input).print}
 
-  describe "#run" do
+  describe "#build_diamond" do
     describe "invalid input" do
       it "returns a message" do
-        invalid_message = "your input is invalid for this kata!"
+        invalid_message = "invalid input"
 
-        assert_equal(invalid_message, Kata.new(123).run)
-        assert_equal(invalid_message, Kata.new("123").run)
-        assert_equal(invalid_message, Kata.new(false).run)
-        assert_equal(invalid_message, Kata.new("!!!").run)
-        assert_equal(invalid_message, Kata.new("Ç€^><ßÄ").run)
+        assert_equal(invalid_message, Kata::Diamond.new(123).print)
+        assert_equal(invalid_message, Kata::Diamond.new("123").print)
+        assert_equal(invalid_message, Kata::Diamond.new(false).print)
+        assert_equal(invalid_message, Kata::Diamond.new("!!!").print)
+        assert_equal(invalid_message, Kata::Diamond.new("Ç€^><ßÄ").print)
       end
     end
 

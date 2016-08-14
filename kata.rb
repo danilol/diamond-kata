@@ -1,53 +1,72 @@
 class Kata
-  attr_reader :input
+  class Diamond
+    attr_reader :input, :output
 
-  SEPARATOR = " "
-  BASE      = "A"
+    SEPARATOR = " "
+    BASE_A    = "A".ord
 
-  def initialize(input)
-    @input = input
-  end
-
-  def run
-    return "your input is invalid for this kata!" unless valid_input?
-
-    lines = diamond_chars.each.map do |letter|
-      build_line(letter)
+    def initialize(input)
+      @input  = input
+      @output = valid_input? ? build_diamond : []
     end
 
-    (lines + lines.reverse[1..-1]).join "\n"
-  end
+    def print
+      return "invalid input" if output.empty?
+      Canvas.new(output, output.reverse[1..-1]).print
+    end
 
-  private
+    private
 
-  def build_line(letter)
-    index = letter.ord - BASE.ord
-    space = size - index
-    return SEPARATOR * space + letter + SEPARATOR * space if first_char?(letter)
-    SEPARATOR * space + letter + SEPARATOR * gap(index) + letter + SEPARATOR * space
-  end
+    def build_diamond
+      @input = input.upcase
+      diamond_chars.each.map { |letter| build_line(letter) }
+    end
 
-  def first_char?(letter)
-    (letter.ord - BASE.ord).zero?
-  end
+    def build_line(letter)
+      index = letter.ord - BASE_A
+      space = size - index
 
-  def gap(index)
-    index * 2 - 1
-  end
+      return build_filler(space) + letter + build_filler(space) if first_letter?(letter)
 
-  def size
-    input.ord - BASE.ord
-  end
+      build_filler(space) + letter + SEPARATOR * gap(index) + letter + build_filler(space)
+    end
 
-  def valid_input?
-    return false unless input.is_a?(String)
-    return false unless ("a".."z").include?(input)
-    @input = input.upcase
-    true
-  end
+    def first_letter?(letter)
+      (letter.ord - BASE_A).zero?
+    end
 
-  def diamond_chars
-    @diamond_chars ||= ("A"..input).to_a
+    def gap(index)
+      index * 2 - 1
+    end
+
+    def size
+      input.ord - BASE_A
+    end
+
+    def build_filler(space)
+      SEPARATOR * space
+    end
+
+    def valid_input?
+      return false unless input.is_a?(String)
+      return false unless ("a".."z").include?(input)
+      true
+    end
+
+    def diamond_chars
+      @diamond_chars ||= ("A"..input).to_a
+    end
+
+    class Canvas
+      def initialize(x, y)
+        @x, @y = x, y
+      end
+
+      def print
+        (@x + @y).join "\n"
+      end
+    end
   end
 end
 
+Kata::Diamond.new(ARGV[0]).print
