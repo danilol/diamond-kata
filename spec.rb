@@ -55,5 +55,15 @@ class KataSpec < Minitest::Spec
         assert_equal(expected_output, result)
       end
     end
+
+    describe "D" do
+      let(:input) { "D" }
+
+      it "returns 'ABCD' diamond" do
+        expected_output = "   A   \n  B B  \n C   C \nD     D\n C   C \n  B B  \n   A   "
+
+        assert_equal(expected_output, result)
+      end
+    end
   end
 end

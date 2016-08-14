@@ -18,7 +18,6 @@ class Kata
     private
 
     def build_diamond
-      @input = input.upcase
       diamond_chars.each.map { |letter| build_line(letter) }
     end
 
@@ -49,8 +48,12 @@ class Kata
 
     def valid_input?
       return false unless input.is_a?(String)
-      return false unless ("a".."z").include?(input)
+      @input = input.upcase
+      return false unless valid_letter?
       true
+    end
+    def valid_letter?
+      ("A".."Z").include?(input)
     end
 
     def diamond_chars
@@ -69,4 +72,4 @@ class Kata
   end
 end
 
-Kata::Diamond.new(ARGV[0]).print
+#Kata::Diamond.new(ARGV[0]).print
