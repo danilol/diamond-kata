@@ -11,8 +11,8 @@ class Kata
   def run
     return "your input is invalid for this kata!" unless valid_input?
 
-    lines = diamond_chars.each_with_index.map do |letter, index|
-      build_line(letter, index)
+    lines = diamond_chars.each.map do |letter|
+      build_line(letter)
     end
 
     (lines + lines.reverse[1..-1]).join "\n"
@@ -20,7 +20,8 @@ class Kata
 
   private
 
-  def build_line(letter, index)
+  def build_line(letter)
+    index = letter.ord - BASE.ord
     space = size - index
     return SEPARATOR * space + letter + SEPARATOR * space if first_char?(letter)
     SEPARATOR * space + letter + SEPARATOR * gap(index) + letter + SEPARATOR * space
@@ -35,17 +36,18 @@ class Kata
   end
 
   def size
-    input.upcase.ord - BASE.ord
+    input.ord - BASE.ord
   end
 
   def valid_input?
     return false unless input.is_a?(String)
     return false unless ("a".."z").include?(input)
+    @input = input.upcase
     true
   end
 
   def diamond_chars
-    @diamond_chars ||= ("A"..input.upcase).to_a
+    @diamond_chars ||= ("A"..input).to_a
   end
 end
 
