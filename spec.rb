@@ -5,9 +5,9 @@ require "minitest/spec"
 class Kata::DiamondSpec < Minitest::Spec
   describe "#print" do
     describe "with invalid input" do
-      it "returns a message" do
-        invalid_message = "invalid input"
+      let(:invalid_message) { "invalid input" }
 
+      it "returns a message" do
         assert_equal(invalid_message, Kata::Diamond.new(nil).print)
         assert_equal(invalid_message, Kata::Diamond.new("").print)
         assert_equal(invalid_message, Kata::Diamond.new(123).print)
