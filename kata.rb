@@ -27,7 +27,7 @@ class Kata
 
       return build_filler(space) + letter + build_filler(space) if first_letter?(letter)
 
-      build_filler(space) + letter + SEPARATOR * gap(index) + letter + build_filler(space)
+      build_filler(space) + letter + build_gap(index) + letter + build_filler(space)
     end
 
     def first_letter?(letter)
@@ -46,7 +46,12 @@ class Kata
       SEPARATOR * space
     end
 
+    def build_gap(index)
+      SEPARATOR * gap(index)
+    end
+
     def valid_input?
+      return false unless input
       return false unless input.is_a?(String)
       @input = input.upcase
       return false unless valid_letter?
@@ -72,4 +77,3 @@ class Kata
   end
 end
 
-#Kata::Diamond.new(ARGV[0]).print
