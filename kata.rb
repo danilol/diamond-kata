@@ -11,7 +11,7 @@ class Kata
     end
 
     def print
-      return "invalid input" if output.empty?
+      return "invalid input" if output.empty? or output.nil?
       Canvas.new(x: output, y: output.reverse[1..-1]).print
     end
 
@@ -65,16 +65,16 @@ class Kata
     def diamond_chars
       @diamond_chars ||= ("A"..input).to_a
     end
+  end
 
-    class Canvas
-      def initialize(x:, y:)
-        @x, @y = x, y
-      end
+  class Canvas
+    def initialize(x:, y:)
+      @x, @y = x, y
+    end
 
-      def print
-        return "" if !@x.is_a?(Array) or !@y.is_a?(Array)
-        (@x + @y).join "\n"
-      end
+    def print
+      return "" if !@x.is_a?(Array) or !@y.is_a?(Array)
+      (@x + @y).join "\n"
     end
   end
 end
