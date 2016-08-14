@@ -24,10 +24,11 @@ class Kata
     def build_line(letter)
       index = letter.ord - BASE_A
       space = size - index
+      filler = build_filler(space)
 
-      return build_filler(space) + letter + build_filler(space) if first_letter?(letter)
+      return filler + letter + filler if first_letter?(letter)
 
-      build_filler(space) + letter + build_gap(index) + letter + build_filler(space)
+      filler + letter + build_gap(index) + letter + filler
     end
 
     def first_letter?(letter)
