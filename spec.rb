@@ -30,7 +30,7 @@ class KataSpec < Minitest::Spec
       let(:input) { "b" }
 
       it "returns 'AB' diamond" do
-        expected_output = " A\nB B\n A"
+        expected_output = " A \nB B\n A "
 
         assert_equal(expected_output, result)
       end
@@ -40,7 +40,7 @@ class KataSpec < Minitest::Spec
       let(:input) { "c" }
 
       it "returns 'ABC' diamond" do
-        expected_output = "  A\n B B\nC   C\n B B\n  A"
+        expected_output = "  A  \n B B \nC   C\n B B \n  A  "
 
         assert_equal(expected_output, result)
       end
@@ -50,7 +50,7 @@ class KataSpec < Minitest::Spec
       let(:input) { "d" }
 
       it "returns 'ABCD' diamond" do
-        expected_output = "   A\n  B B\n C   C\nD     D\n C   C\n  B B\n   A"
+        expected_output = "   A   \n  B B  \n C   C \nD     D\n C   C \n  B B  \n   A   "
 
         assert_equal(expected_output, result)
       end

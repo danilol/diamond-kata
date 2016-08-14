@@ -9,7 +9,7 @@ class Kata
   end
 
   def run
-    return   "your input is invalid for this kata!" unless valid_input?
+    return "your input is invalid for this kata!" unless valid_input?
 
     lines = diamond_chars.each_with_index.map do |letter, index|
       build_line(letter, index, diamond_chars.size)
@@ -22,8 +22,12 @@ class Kata
 
   def build_line(letter, index, size)
     space = size - index - 1
-    return SEPARATOR * space + letter if index.zero?
-    SEPARATOR * space + letter + SEPARATOR * gap(index) + letter
+    return SEPARATOR * space + letter + SEPARATOR * space if first_char?(letter)
+    SEPARATOR * space + letter + SEPARATOR * gap(index) + letter + SEPARATOR * space
+  end
+
+  def first_char?(letter)
+    (letter.ord - BASE.ord).zero?
   end
 
   def gap(index)
