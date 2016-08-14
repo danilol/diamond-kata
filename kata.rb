@@ -12,7 +12,7 @@ class Kata
 
     def print
       return "invalid input" if output.empty?
-      Canvas.new(output, output.reverse[1..-1]).print
+      Canvas.new(x: output, y: output.reverse[1..-1]).print
     end
 
     private
@@ -66,11 +66,12 @@ class Kata
     end
 
     class Canvas
-      def initialize(x, y)
+      def initialize(x:, y:)
         @x, @y = x, y
       end
 
       def print
+        return "" if !@x.is_a?(Array) or !@y.is_a?(Array)
         (@x + @y).join "\n"
       end
     end

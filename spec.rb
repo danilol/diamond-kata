@@ -29,3 +29,13 @@ class Kata::DiamondSpec < Minitest::Spec
     end
   end
 end
+
+class Kata::CanvasSpec < Minitest::Spec
+  describe "#print" do
+    it "prints the message" do
+      assert_equal("", Kata::Diamond::Canvas.new(x: nil, y: nil).print)
+      assert_equal("", Kata::Diamond::Canvas.new(x: "a", y: nil).print)
+      assert_equal("", Kata::Diamond::Canvas.new(x: "a", y: "a").print)
+    end
+  end
+end
